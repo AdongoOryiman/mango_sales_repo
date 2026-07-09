@@ -18,13 +18,13 @@
     }
 
     :root {
-      --bg-color: #FAF8F5; /* Subtle beige background */
+      --bg-color: #FAFAFA; /* Professional Polish slate/light background */
       --panel-bg: #FFFFFF; /* Absolute white for input areas and cards */
       --text-color: #000000; /* Absolute black */
-      --muted-color: #666666; /* Gray for labels and non-essential texts */
+      --muted-color: rgba(0, 0, 0, 0.6); /* Muted black */
       --border-color: #000000; /* Crisp black borders */
-      --border-light: #E5E5DB; /* Beige/grey divider borders */
-      --focus-shadow: 0 0 0 3px rgba(0, 0, 0, 0.15);
+      --border-light: #000000; /* Clean solid black borders throughout */
+      --focus-highlight: #F5F5DC; /* Professional Polish beige focus highlight */
       --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
     }
@@ -39,6 +39,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      user-select: none;
     }
 
     /* Container Constraints */
@@ -48,32 +49,33 @@
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 1.5rem;
     }
 
     /* Header Section styling */
     header {
-      border-bottom: 3px double var(--border-color);
+      border-bottom: 2px solid var(--border-color);
       padding-bottom: 1rem;
       display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1rem;
     }
 
     h1 {
-      font-size: 2rem;
-      font-weight: 800;
+      font-size: 1.75rem;
+      font-weight: 900;
       text-transform: uppercase;
-      letter-spacing: -0.04em;
+      letter-spacing: -0.05em;
       line-height: 1.1;
     }
 
     .subtitle {
-      font-size: 0.875rem;
-      font-weight: 500;
+      font-size: 0.6875rem;
+      font-weight: 700;
       color: var(--muted-color);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.15em;
     }
 
     /* Form Container and Header Variable Inputs */
@@ -83,8 +85,8 @@
       gap: 1rem;
       background: var(--panel-bg);
       border: 1px solid var(--border-color);
-      padding: 1.5rem;
-      box-shadow: 4px 4px 0px rgba(0,0,0,1);
+      padding: 1.25rem;
+      box-shadow: none; /* Removed heavy offsets for a professional flat look */
     }
 
     .form-group {
@@ -94,10 +96,10 @@
     }
 
     .form-group label {
-      font-size: 0.75rem;
+      font-size: 0.625rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.1em;
     }
 
     /* Styled Input Elements */
@@ -106,16 +108,16 @@
     input[type="date"],
     select {
       width: 100%;
-      height: 2.75rem;
-      padding: 0 0.75rem;
+      height: 2.25rem;
+      padding: 0 0.5rem;
       font-family: var(--font-sans);
-      font-size: 0.9375rem;
+      font-size: 0.8125rem;
       background-color: var(--panel-bg);
       color: var(--text-color);
       border: 1px solid var(--border-color);
       border-radius: 0;
       outline: none;
-      transition: all 0.15s ease-in-out;
+      transition: background-color 0.1s ease-in-out;
     }
 
     /* Ensure number inputs don't have arrows (cleaner look) */
@@ -130,20 +132,17 @@
       text-align: right;
     }
 
-    /* Focus Highlights - Strict High Contrast */
+    /* Focus Highlights - Strict High Contrast & Beige Background */
     input:focus,
     select:focus {
-      border-width: 2px;
-      border-color: var(--border-color);
-      box-shadow: var(--focus-shadow);
-      background-color: #FFFFFF;
+      background-color: var(--focus-highlight) !important;
+      outline: none;
     }
 
     /* Data Entry Grid Table Styling */
     .grid-container {
       background: var(--panel-bg);
       border: 1px solid var(--border-color);
-      box-shadow: 6px 6px 0px rgba(0,0,0,1);
       overflow-x: auto;
     }
 
@@ -159,17 +158,29 @@
     }
 
     th {
-      font-size: 0.75rem;
+      font-size: 0.6875rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 0.875rem 1rem;
+      letter-spacing: 0.1em;
+      padding: 0.625rem 0.75rem;
       border: 1px solid var(--border-color);
     }
 
     td {
+      padding: 0; /* Compact full-width design */
+      border: 1px solid var(--border-color);
+    }
+
+    /* Input elements inside the grid fill up their containers perfectly */
+    .grid-row input {
+      width: 100%;
+      height: 100%;
+      min-height: 2.25rem;
+      background: transparent;
       padding: 0.5rem 0.75rem;
-      border: 1px solid var(--border-light);
+      font-size: 0.8125rem;
+      outline: none;
+      border: none;
     }
 
     /* Read only column */
@@ -177,8 +188,18 @@
       background-color: var(--bg-color);
       font-family: var(--font-mono);
       font-weight: 600;
+      color: #444444;
       text-align: right;
-      padding-right: 1rem;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.8125rem;
+      user-select: none;
+    }
+
+    .index-cell {
+      background-color: var(--bg-color);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-align: center;
       user-select: none;
     }
 
@@ -188,59 +209,58 @@
 
     /* Bottom Summary Total Row */
     .total-row {
-      background-color: var(--bg-color);
+      background-color: var(--focus-highlight); /* Soft beige background */
       font-weight: 700;
     }
 
     .total-row td {
       border-top: 2px solid var(--border-color);
       border-bottom: 2px solid var(--border-color);
-      padding: 1rem 0.75rem;
+      padding: 0.625rem 0.75rem;
     }
 
     .total-label {
-      font-size: 0.875rem;
+      font-size: 0.75rem;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.1em;
     }
 
     .total-val {
       font-family: var(--font-mono);
       text-align: right;
-      font-size: 1rem;
+      font-size: 0.875rem;
     }
 
     /* Submit Button styling */
     .submit-container {
       margin-top: 1rem;
       margin-bottom: 3rem;
+      display: flex;
+      justify-content: flex-end;
     }
 
     .btn-submit {
-      width: 100%;
-      height: 3.5rem;
+      width: auto;
+      min-width: 15rem;
+      height: 3rem;
       background-color: var(--border-color);
       color: var(--panel-bg);
       border: none;
       font-family: var(--font-sans);
-      font-size: 1rem;
+      font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.15em;
       cursor: pointer;
-      transition: all 0.2s ease-in-out;
-      box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+      transition: all 0.15s ease-in-out;
     }
 
     .btn-submit:hover {
       background-color: #222222;
-      transform: translateY(-1px);
-      box-shadow: 5px 5px 0px rgba(0,0,0,0.35);
     }
 
     .btn-submit:active {
-      transform: translateY(1px);
-      box-shadow: 2px 2px 0px rgba(0,0,0,0.25);
+      background-color: #444444;
     }
 
     /* Success Toast styling */
@@ -258,12 +278,13 @@
     .toast {
       background: var(--border-color);
       color: var(--panel-bg);
-      padding: 1rem 1.5rem;
-      font-size: 0.875rem;
-      font-weight: 600;
+      padding: 0.75rem 1.25rem;
+      font-size: 0.75rem;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      box-shadow: 4px 4px 0px rgba(0,0,0,0.25);
+      letter-spacing: 0.1em;
+      box-shadow: none;
+      border: 1px solid var(--border-color);
       opacity: 0;
       transform: translateY(1rem);
       transition: opacity 0.3s ease, transform 0.3s ease;
@@ -284,13 +305,19 @@
       }
 
       .app-container {
-        gap: 1.5rem;
+        gap: 1.25rem;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
       }
 
       .section-metadata {
         grid-template-columns: 1fr;
         padding: 1rem;
-        gap: 1rem;
+        gap: 0.75rem;
       }
 
       /* Grid / Table to Mobile Stacked Cards */
@@ -311,10 +338,10 @@
       /* Each row behaves as an elegant independent card with sharp borders */
       tr.grid-row {
         background: var(--panel-bg);
-        border: 2px solid var(--border-color);
-        margin-bottom: 1.5rem;
-        padding: 1rem;
-        box-shadow: 4px 4px 0px rgba(0,0,0,1);
+        border: 1px solid var(--border-color);
+        margin-bottom: 1.25rem;
+        padding: 0.75rem;
+        box-shadow: none;
       }
 
       /* Row styling for each input field container */
@@ -323,8 +350,8 @@
         justify-content: space-between;
         align-items: center;
         border: none;
-        border-bottom: 1px solid var(--border-light);
-        padding: 0.65rem 0;
+        border-bottom: 1px solid #E5E5DB;
+        padding: 0.5rem 0;
         gap: 1rem;
       }
 
@@ -335,7 +362,7 @@
       /* Dynamically pulling headers from data-label and aligning neatly */
       tr.grid-row td::before {
         content: attr(data-label);
-        font-size: 0.75rem;
+        font-size: 0.6875rem;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.05em;
@@ -347,24 +374,32 @@
       /* Style input inside mobile stacked cards */
       tr.grid-row td input {
         width: 60%;
-        height: 2.5rem;
+        height: 2rem;
+        border: 1px solid var(--border-color);
+        padding: 0 0.5rem;
+      }
+
+      /* Hide index cell on mobile stacked cards */
+      tr.grid-row td.index-cell {
+        display: none;
       }
 
       /* Styling read-only cells on mobile */
       tr.grid-row td.readonly-cell {
         background-color: transparent;
-        font-size: 1rem;
+        font-size: 0.875rem;
         display: flex;
         justify-content: flex-end;
+        padding-right: 0.5rem;
       }
 
       /* The bottom static sum panel is reconstructed as a distinct block */
       .total-row {
         background: var(--panel-bg);
-        border: 2px solid var(--border-color);
-        margin-top: 2rem;
-        padding: 1rem;
-        box-shadow: 4px 4px 0px rgba(0,0,0,1);
+        border: 1px solid var(--border-color);
+        margin-top: 1.5rem;
+        padding: 0.75rem;
+        box-shadow: none;
       }
 
       .total-row td {
@@ -373,7 +408,7 @@
         align-items: center;
         padding: 0.5rem 0;
         border: none;
-        border-bottom: 1px solid var(--border-light);
+        border-bottom: 1px solid #E5E5DB;
       }
 
       .total-row td:last-child {
@@ -382,7 +417,7 @@
 
       .total-row td::before {
         content: attr(data-label);
-        font-size: 0.75rem;
+        font-size: 0.6875rem;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.05em;
@@ -398,6 +433,14 @@
       .total-row td .total-val {
         width: auto;
         text-align: right;
+      }
+
+      .submit-container {
+        justify-content: center;
+      }
+
+      .btn-submit {
+        width: 100%;
       }
     }
   </style>
@@ -457,11 +500,13 @@
       <section class="grid-container" style="margin-top: 1.5rem;">
         <table>
           <thead>
-            <tr>
-              <th style="width: 40%;">Waiter / Waitress Name</th>
-              <th style="width: 20%; text-align: right;">VIP Charges (₦)</th>
-              <th style="width: 20%; text-align: right;">Standard Prices (₦)</th>
-              <th style="width: 20%; text-align: right;">Total Served (₦)</th>
+            <tr class="bg-black text-white">
+              <th style="width: 5%; text-align: center;">#</th>
+              <th style="width: 25%;">Waiter / Waitress Name</th>
+              <th style="width: 15%; text-align: right;">MD's Bill (₦)</th>
+              <th style="width: 15%; text-align: right;">VIP Charges (₦)</th>
+              <th style="width: 15%; text-align: right;">Standard Prices (₦)</th>
+              <th style="width: 25%; text-align: right;">Total Served (₦)</th>
             </tr>
           </thead>
           <tbody id="grid-body">
@@ -469,7 +514,8 @@
           </tbody>
           <tfoot>
             <tr class="total-row">
-              <td data-label="Summary"><span class="total-label">TOTAL</span></td>
+              <td colspan="2" data-label="Summary" class="text-right"><span class="total-label" style="padding-right: 1rem;">TOTAL</span></td>
+              <td data-label="Total MD's Bill (₦)" class="total-val" id="sum-mdbill">₦0</td>
               <td data-label="Total VIP (₦)" class="total-val" id="sum-vip">₦0</td>
               <td data-label="Total Standard (₦)" class="total-val" id="sum-standard">₦0</td>
               <td data-label="Grand Total (₦)" class="total-val" id="sum-total" style="font-weight: 800;">₦0</td>
@@ -503,6 +549,12 @@
         row.className = 'grid-row';
         row.id = `row-${i}`;
 
+        // # Index Cell
+        const tdIndex = document.createElement('td');
+        tdIndex.className = 'index-cell';
+        tdIndex.innerText = i + 1;
+        row.appendChild(tdIndex);
+
         // Waiter Name Input
         const tdName = document.createElement('td');
         tdName.setAttribute('data-label', 'Waiter/Waitress Name');
@@ -510,8 +562,19 @@
         inputName.type = 'text';
         inputName.className = 'input-waiter';
         inputName.placeholder = `Waiter ${i + 1}`;
-        inputName.setAttribute('tabindex', 5 + (i * 3));
+        inputName.setAttribute('tabindex', 5 + (i * 4));
         tdName.appendChild(inputName);
+
+        // MD's Bill Input
+        const tdMdbill = document.createElement('td');
+        tdMdbill.setAttribute('data-label', "MD's Bill (₦)");
+        const inputMdbill = document.createElement('input');
+        inputMdbill.type = 'number';
+        inputMdbill.className = 'input-mdbill';
+        inputMdbill.min = '0';
+        inputMdbill.placeholder = '0';
+        inputMdbill.setAttribute('tabindex', 5 + (i * 4) + 1);
+        tdMdbill.appendChild(inputMdbill);
 
         // VIP Charges Input
         const tdVip = document.createElement('td');
@@ -521,7 +584,7 @@
         inputVip.className = 'input-vip';
         inputVip.min = '0';
         inputVip.placeholder = '0';
-        inputVip.setAttribute('tabindex', 5 + (i * 3) + 1);
+        inputVip.setAttribute('tabindex', 5 + (i * 4) + 2);
         tdVip.appendChild(inputVip);
 
         // Standard Prices Input
@@ -532,7 +595,7 @@
         inputStandard.className = 'input-standard';
         inputStandard.min = '0';
         inputStandard.placeholder = '0';
-        inputStandard.setAttribute('tabindex', 5 + (i * 3) + 2);
+        inputStandard.setAttribute('tabindex', 5 + (i * 4) + 3);
         tdStandard.appendChild(inputStandard);
 
         // Calculated Total Served Cell
@@ -543,6 +606,7 @@
         // Total calculated read-only gets no tab index or -1
         
         row.appendChild(tdName);
+        row.appendChild(tdMdbill);
         row.appendChild(tdVip);
         row.appendChild(tdStandard);
         row.appendChild(tdTotal);
@@ -551,30 +615,35 @@
       }
 
       // Hook up real-time mathematical recalculations
+      const inputsMdbill = document.querySelectorAll('.input-mdbill');
       const inputsVip = document.querySelectorAll('.input-vip');
       const inputsStandard = document.querySelectorAll('.input-standard');
       const inputsWaiter = document.querySelectorAll('.input-waiter');
 
       const recalculateAll = () => {
+        let totalMdbillSum = 0;
         let totalVipSum = 0;
         let totalStandardSum = 0;
         let grandTotalSum = 0;
 
         for (let i = 0; i < 15; i++) {
+          const mdbillVal = parseFloat(inputsMdbill[i].value) || 0;
           const vipVal = parseFloat(inputsVip[i].value) || 0;
           const stdVal = parseFloat(inputsStandard[i].value) || 0;
-          const rowTotal = vipVal + stdVal;
+          const rowTotal = mdbillVal + vipVal + stdVal;
 
           // Update individual row total
           const totalCell = document.querySelector(`#row-${i} .input-total`);
           totalCell.innerText = rowTotal.toLocaleString('en-US');
 
+          totalMdbillSum += mdbillVal;
           totalVipSum += vipVal;
           totalStandardSum += stdVal;
           grandTotalSum += rowTotal;
         }
 
         // Update overall summary totals at the bottom
+        document.getElementById('sum-mdbill').innerText = `₦${totalMdbillSum.toLocaleString('en-US')}`;
         document.getElementById('sum-vip').innerText = `₦${totalVipSum.toLocaleString('en-US')}`;
         document.getElementById('sum-standard').innerText = `₦${totalStandardSum.toLocaleString('en-US')}`;
         document.getElementById('sum-total').innerText = `₦${grandTotalSum.toLocaleString('en-US')}`;
@@ -582,7 +651,11 @@
 
       // Add input listeners for real-time reactions
       gridBody.addEventListener('input', (e) => {
-        if (e.target.classList.contains('input-vip') || e.target.classList.contains('input-standard')) {
+        if (
+          e.target.classList.contains('input-mdbill') ||
+          e.target.classList.contains('input-vip') ||
+          e.target.classList.contains('input-standard')
+        ) {
           recalculateAll();
         }
       });
@@ -609,22 +682,25 @@
 
         for (let i = 0; i < 15; i++) {
           const nameInput = inputsWaiter[i].value.trim();
+          const mdbillRaw = inputsMdbill[i].value;
           const vipRaw = inputsVip[i].value;
           const stdRaw = inputsStandard[i].value;
 
           // Check if row is completely unpopulated
-          const isRowEmpty = !nameInput && vipRaw === '' && stdRaw === '';
+          const isRowEmpty = !nameInput && mdbillRaw === '' && vipRaw === '' && stdRaw === '';
           if (isRowEmpty) {
             continue; // Ignore fully empty row
           }
 
           // Strict Zero Coercion for numbers left blank
+          const mdbillVal = mdbillRaw === '' ? 0 : parseInt(mdbillRaw, 10);
           const vipVal = vipRaw === '' ? 0 : parseInt(vipRaw, 10);
           const stdVal = stdRaw === '' ? 0 : parseInt(stdRaw, 10);
-          const totalVal = vipVal + stdVal;
+          const totalVal = mdbillVal + vipVal + stdVal;
 
           submittedRows.push({
             waiterName: nameInput || `Unnamed Waiter`,
+            mdBill: mdbillVal,
             vipCharges: vipVal,
             standardPrices: stdVal,
             totalServed: totalVal
@@ -662,6 +738,7 @@
             // Success Routine:
             // Clear all grid inputs
             inputsWaiter.forEach(input => input.value = '');
+            inputsMdbill.forEach(input => input.value = '');
             inputsVip.forEach(input => input.value = '');
             inputsStandard.forEach(input => input.value = '');
             
